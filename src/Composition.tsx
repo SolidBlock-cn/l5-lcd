@@ -68,15 +68,16 @@ export const MyComposition = () => {
 	let summaryClass: string;
 	const zhname: string = zhnames[currentStation];
 	const splitTransfer = currentStation === 24;
-	if (splitTransfer ? timeSince % 360 >= 270 : timeSince % 270 >= 180) {
+	if (splitTransfer ? timeSince % 270 >= 270 : timeSince % 180 >= 180) {
+		// 此部分不显示，仅在代码中保留
 		summaryContent = <>武汉轨道交通5号线 开往：武汉站东广场</>
 		summaryClass = 'summary-destination'
-	} else if (splitTransfer ? timeSince % 360 < 90 : timeSince % 270 < 90) {
+	} else if (splitTransfer ? timeSince % 270 < 90 : timeSince % 180 < 90) {
 		const transfer = zhTransfers[zhname]
 		summaryContent = <>{isArrived ? zhname + "到了" : "下一站：" + zhname + (transfer ? "，" + transfer : '')} </>
 		summaryClass = 'summary-zh'
 	} else if (splitTransfer) {
-		if (timeSince % 360 < 180) {
+		if (timeSince % 270 < 180) {
 			summaryContent = <>{(isArrived ? "We are arriving at " + ennames[currentStation].replaceAll('_', '') : "The next station is " + ennames[currentStation].replaceAll('_', ''))}</>
 		} else {
 			summaryContent = <>{enTransfers[zhname]}</>
@@ -98,12 +99,13 @@ export const MyComposition = () => {
 					enname={ennames[i].replaceAll('_', ' ')}
 					currentStation={currentStation}
 					timeSince={timeSince}
+					currentFrame={currentFrame}
 				/>))
 		}
 
-		const startHighlight = currentStation;
-		const period = zhnames.length - currentStation + 1;
-		const highlightUntil = currentStation + Math.floor((timeSince % (period * 10)) / 10)
+		const startHighlight = isArrived ? currentStation + 1 : currentStation;
+		const period = zhnames.length - startHighlight + 1;
+		const highlightUntil = startHighlight + Math.floor((timeSince % (period * 10)) / 10)
 
 		const arrowElements: JSX.Element[] = []
 		for (let i = 0; i < zhnames.length; i++) {
@@ -119,13 +121,6 @@ export const MyComposition = () => {
 
 		return (
 			<main id='main-lcd'>
-				<div style={{
-					position: 'absolute',
-					bottom: 0,
-					left: 0
-				}}>
-					timeSince = {timeSince}
-				</div>
 				<div className='line' />
 				<header id="header">
 					<span id='summary' className={summaryClass}

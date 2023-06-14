@@ -130,9 +130,9 @@ body {
 
 .zhname {
     font-size: 36px;
-    text-justify: inter-character;
     overflow: visible;
-    white-space: nowrap;
+    display: flex;
+    justify-content: space-between;
     transform-origin: 0 0;
 }
 
@@ -164,6 +164,8 @@ body {
 .station-mark-container {
     width: 40px;
     height: 40px;
+    display: flex;
+    place-content: center;
 }
 
 .station-mark {
@@ -181,7 +183,7 @@ body {
 }
 
 .station-mark-transfer-string {
-    font-size: 24px;
+    font-size: 27px;
 }
 
 .station-mark-past {
@@ -263,7 +265,7 @@ body {
 }
 
 .arrow-element img {
-    height: 12px;
+    height: 14px;
 }
 
 #arrow-container-left {

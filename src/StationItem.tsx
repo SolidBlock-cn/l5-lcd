@@ -1,4 +1,4 @@
-export const StationItem: React.FC<{ id: number, zhname: string, enname: string, currentStation: number, timeSince: number }> = ({ id, zhname, enname, currentStation, timeSince }) => {
+export const StationItem: React.FC<{ id: number, zhname: string, enname: string, currentStation: number, timeSince: number, currentFrame : number }> = ({ id, zhname, enname, currentStation, timeSince, currentFrame }) => {
   let markType: string;
   let transferString: string | null = null;
   if (zhname == '复兴路') {
@@ -6,7 +6,7 @@ export const StationItem: React.FC<{ id: number, zhname: string, enname: string,
   } else if (zhname == '积玉桥') {
     transferString = '2'
   } else if (zhname == '徐家棚') {
-    if (timeSince % 90 < 45) {
+    if (currentFrame % 90 < 45) {
       transferString = '7'
     } else {
       transferString = '8'
@@ -32,22 +32,24 @@ export const StationItem: React.FC<{ id: number, zhname: string, enname: string,
       <div className="station-mark-container">
         <div className={"station-mark " + markType}>
           {transferString != null ? <span className="station-mark-transfer-string" style={{
-            scale: "" + (0.5 + 0.5 * (timeSince % 45) / 45)
+            scale: "" + (0.6 + 0.4 * (currentFrame % 45) / 45)
           }}>{transferString}</span> : <></>}
         </div>
       </div>
       <div className="station-text">
         <div className={"zhname zhname-length-" + zhname.length}>
-          {currentStation !== id ? zhname : zhname.split('').map((char, i) => {
+          {/* currentStation !== id ? zhname : */zhname.split('').map((char, i) => {
             let opacity: number;
-            if (i < Math.floor(opacityBoundaryZh)) {
+            if (currentStation !== id) {
+              opacity = 1
+            } else if (i < Math.floor(opacityBoundaryZh)) {
               opacity = 1;
             } else if (i > opacityBoundaryZh) {
               opacity = 0;
             } else {
               opacity = opacityBoundaryZh % 1;
             }
-            return <>{i==0 ? "": <>&zwnj;</>}<span key={i} style={{opacity: opacity, display: 'inline-block', scale: String(1 + 0.2 * Math.max(0, 0.5-opacity))}}>{char}</span></>
+            return <><span key={i} style={{ opacity: opacity, display: 'inline-block', scale: String(1 + 0.2 * Math.max(0, 0.7 - opacity)) }}>{char}</span></>
           })}
         </div>
         <div className="enname">
@@ -60,7 +62,7 @@ export const StationItem: React.FC<{ id: number, zhname: string, enname: string,
             } else {
               opacity = opacityBoundaryEn % 1;
             }
-            return <span key={i} style={{opacity: opacity}}>{char}</span>
+            return <span key={i} style={{ opacity: opacity }}>{char}</span>
           })}
         </div></div>
     </div>
