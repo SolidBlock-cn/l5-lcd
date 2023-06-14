@@ -1,0 +1,325 @@
+#main-lcd {
+    width: 100%;
+    height: 270px;
+    box-shadow: 3px 3px 5px gray;
+    display: grid;
+    grid-template-columns: 235px 1450px 235px;
+    grid-template-rows: 55px 215px;
+}
+
+body {
+    background-color: silver;
+    margin: 0;
+    font-family: 'HarmonyOS Sans SC Medium';
+}
+
+
+#header {
+    font-size: 36px;
+    grid-area: 1/2/2/3;
+    text-align: start;
+    align-self: center;
+    white-space: nowrap;
+    margin: auto 1em;
+    display: grid;
+    grid-template-columns: auto 400px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#summary {
+    color: maroon;
+    overflow-x: hidden;
+}
+
+#doorside {
+    line-height: 1;
+    display: grid;
+    grid-template-rows: auto auto;
+    grid-auto-flow: column;
+    text-align: start;
+    justify-content: start;
+}
+
+#doorside.doorside-opposite {
+    color: darkred;
+}
+
+#doorside.doorside-this {
+    color: green;
+}
+
+#door-icon {
+    grid-area: 1/1/3/1;
+    padding: 0 8px;
+}
+
+#door-icon img {
+    height: 45px;
+}
+
+.station-list {
+    display: flex;
+    margin: auto;
+    justify-content: space-around;
+    text-align: justify;
+    text-align-last: justify;
+    line-height: 1.1;
+}
+
+.station-list-horizontal {
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+.station-list-vertical {
+    flex-direction: column-reverse;
+    writing-mode: vertical-rl;
+}
+
+.station-list > div {
+    display: flex;
+    align-items: center;
+}
+
+.station-text {
+    margin: 5px
+}
+
+.station-list-horizontal > div {
+    height: 70px;
+}
+
+.station-list-horizontal .station-text {
+    width: 150px;
+}
+
+.station-list-vertical > div {
+    width: 75px;
+}
+
+#stations-left {
+    grid-area: 1/1/3/2;
+    margin-right: 0;
+}
+
+#stations-bottom {
+    grid-area: 2/2/3/3;
+    margin-bottom: 10px
+}
+
+#stations-right {
+    grid-area: 1/3/3/4;
+    margin-left: 0;
+    flex-direction: column-reverse;
+}
+
+#stations-left > div {
+    flex-direction: row-reverse;
+}
+
+#stations-bottom > div {
+    flex-direction: row-reverse;
+}
+
+.station-list-vertical .station-text {
+    height: 150px;
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.zhname {
+    font-size: 36px;
+    text-justify: inter-character;
+    overflow: visible;
+    white-space: nowrap;
+    transform-origin: 0 0;
+}
+
+.station-list-vertical .zhname-length-5 {
+    scale: 1 calc(150 / 5 / 32);
+    font-size: 32px
+}
+
+.station-list-vertical .zhname-length-6 {
+    scale: 1 calc(150 / 6 / 32);
+    font-size: 32px
+}
+
+.station-list-horizontal .zhname-length-5 {
+    scale: calc(150 / 5 / 32) 1;
+    font-size: 32px
+}
+
+.station-list-horizontal .zhname-length-6 {
+    scale: calc(150 / 6 / 32) 1;
+    font-size: 32px
+}
+
+.enname {
+    font-size: 16px;
+    text-justify: inter-word;
+}
+
+.station-mark-container {
+    width: 40px;
+    height: 40px;
+}
+
+.station-mark {
+    width: 36px;
+    height: 36px;
+    margin: auto;
+    background-color: red;
+    border: 4px solid white;
+    border-radius: 100%;
+    box-shadow: inset 2px -2px 4px #fffc, inset -2px 2px 5px #1119;
+    display: grid;
+    place-items: center center;
+    writing-mode: initial;
+    line-height: 1;
+}
+
+.station-mark-transfer-string {
+    font-size: 24px;
+}
+
+.station-mark-past {
+    background-color: gray;
+}
+
+.station-mark-past .station-mark-transfer-string {
+    scale: 0.9 !important;
+}
+
+.station-mark-current {
+    background-color: red;
+}
+
+.station-mark-future {
+    background-color: limegreen;
+}
+
+.station-mark-transfer-2 {
+    background-color: #ec9cbb;
+}
+
+.station-mark-transfer-4 {
+    background-color: #a6d30b;
+}
+
+.station-mark-transfer-7 {
+    background-color: #eb7c16;
+}
+
+.station-mark-transfer-8 {
+    background-color: #9dabaa;
+}
+
+.station-mark:not(.station-mark-transfer)::before {
+    width: 16px;
+    content: "";
+    height: 16px;
+    display: block;
+    margin: auto;
+    border-radius: 100%;
+    box-shadow: 2px 2px 2px white, -2px -2px 2px white;
+    filter: blur(1px);
+}
+
+#station-entry-24 .enname,
+#station-entry-14 .enname {
+    font-size: 90%;
+}
+
+.line {
+    position: absolute;
+    border: solid 16px #b00;
+    left: 207px;
+    right: 207px;
+    top: 40px;
+    bottom: 22px;
+    border-top: none;
+    z-index: -1;
+    border-bottom-left-radius: 45px;
+    border-bottom-right-radius: 45px;
+}
+
+.arrow-container {
+    position: absolute;
+    display: flex;
+    font-size: 20px;
+    line-height: 1;
+    place-items: center center;
+    place-content: center center;
+    font-family: 'HarmonyOS Sans SC Black';
+    color: white;
+}
+
+.arrow-element {
+    display: grid;
+    place-items: center center;
+    user-select: none;
+}
+
+.arrow-element img {
+    height: 12px;
+}
+
+#arrow-container-left {
+    left: 215px;
+    width: 0;
+    top: 45px;
+    writing-mode: vertical-rl;
+}
+
+#arrow-container-left .arrow-element {
+    height: 70px;
+    rotate: 90deg;
+}
+
+#arrow-container-left-bottom {
+    left: 215px;
+    bottom: 30px;
+    width: 24px;
+    height: 24px;
+}
+
+#arrow-container-left-bottom .arrow-element {
+    rotate: 45deg;
+}
+
+#arrow-container-bottom {
+    height: 0;
+    bottom: 30px;
+    left: 0;
+    right: 0;
+}
+
+#arrow-container-bottom .arrow-element {
+    width: 75px;
+}
+
+#arrow-container-right-bottom {
+    right: 215px;
+    bottom: 30px;
+    width: 24px;
+    height: 24px;
+}
+
+#arrow-container-right-bottom .arrow-element {
+    rotate: -45deg;
+}
+
+#arrow-container-right {
+    right: 215px;
+    width: 0;
+    top: 45px;
+    writing-mode: vertical-rl;
+    flex-direction: row-reverse;
+}
+
+#arrow-container-right .arrow-element {
+    height: 70px;
+    rotate: -90deg;
+}
