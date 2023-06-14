@@ -4,7 +4,7 @@
   "description": "5号线LCD",
   "scripts": {
     "start": "remotion preview",
-    "build": "remotion render LCD out/video.mp4",
+    "build": "remotion render",
     "upgrade": "remotion upgrade",
     "test": "eslint src --ext ts,tsx,js,jsx && tsc"
   },
